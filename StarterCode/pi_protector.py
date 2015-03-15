@@ -7,26 +7,13 @@ DEBUG = 0
 
 # IR proximity sensor connected to adc #0
 sensor_adc = 0
+#-------------- THE FUN STARTS HERE! ---------------
 
 
-play_sound1 = 'aplay alarm_beep.wav'
-play_sound2 = 'aplay alarm_beepwef.wav'
-last_sound = 1
+# read the analog pin (the sensor reading)
+proximity = readadc(sensor_adc, SPICLK, SPIMOSI, SPIMISO, SPICS)
 
-while True:
-        # read the analog pin
-        proximity = readadc(sensor_adc, SPICLK, SPIMOSI, SPIMISO, SPICS)
 
-        if DEBUG:
-                print "proximity:", proximity
 
-	if proximity >= 400:
-		if last_sound == 1:
-			os.system(play_sound1)
-			last_sound = 0
-		else:
-			os.system(play_sound2)
-			last_sound = 1
-
-        # sleep for half a second
-        time.sleep(0.5)
+# sleep for half a second
+time.sleep(0.5)
